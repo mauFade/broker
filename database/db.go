@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/mauFade/broker/application/entities/user"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -38,7 +39,10 @@ func ConnectDB() {
 
 	log.Println("Running migrations")
 
-	db.AutoMigrate()
+	db.AutoMigrate(
+		user.User{},
+		user.Address{},
+	)
 
 	Database = DatabaseInstance{
 		DataBase: db,
